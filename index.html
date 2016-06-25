@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='lib/sm.js' charset='utf-8'></script>
+    <style>
+        /*针对ios的sticky布局*/
+        .fixed-tab.sticky{position:-webkit-sticky;position:sticky;}
+    </style>
+</head>
+<body>
+<div class="page-group">
+    <!--一个页面,如果有多个就是多个page,要首先显示的需要加上page-current类-->
+    <div class="page page-current">
+        <!--内容区域-->
+        <div class="page-content">
+            <div class="content">
+                <p>其他内容区域</p>
+                <p>其他内容区域</p>
+                <p>其他内容区域</p>
+                <p>其他内容区域</p>
+                <p>其他内容区域</p>
+                <div class="buttons-tab fixed-tab" data-offset="0">
+                    <a href="#tab1" class="tab-link active button">全部</a>
+                    <a href="#tab2" class="tab-link button">待付款</a>
+                    <a href="#tab3" class="tab-link button">待发货</a>
+                </div>
+
+                <div class="tabs">
+                    <div id="tab1" class="tab active">
+                        <div class="content-block">
+                            <div class="buttons-row">
+                                <a href="#tab1-1" class="tab-link active button">Tab 1</a>
+                                <a href="#tab1-2" class="tab-link button">Tab 2</a>
+                                <a href="#tab1-3" class="tab-link button">Tab 3</a>
+                            </div>
+                            <div class="tabs">
+                                <p class='tab active' id='tab1-1' style="height:60rem">This is tab 1-1 contentThis is tab 1-1 contentThis is tab 1-1 contentThis is tab 1-1 contentThis is tab 1-1 contentThis is tab 1-1 contentThis is tab 1-1 contentThis is tab 1-1 content</p>
+                                <p class='tab' id='tab1-2'>This is tab 1-2 content</p>
+                                <p class='tab' id='tab1-3'>13855589778</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab">
+                        <div class="content-block">
+                            <p style="height:60rem">This is tab 2 content start</p>
+                            <p >This is tab 2 content end</p>
+                        </div>
+                    </div>
+                    <div id="tab3" class="tab">
+                        <div class="content-block">
+                            <p style="height:20rem">This is tab 3 content start</p>
+                            <p >This is tab 3 content end</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    // 针对uc横竖屏rem html没有重绘的问题
+                    var style;
+                    if(style=document.getElementById("forhtml")){
+                        style.parentNode.removeChild(style);
+                    }
+                    style = document.createElement("style");
+                    style.id="forhtml";
+                    document.head.appendChild(style);
+                    style.appendChild(document.createTextNode("html{font-size:"+20 * (clientWidth / 320)+"px !important;}"));
+                    //
+                    docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+                };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+</body>
+</html>
